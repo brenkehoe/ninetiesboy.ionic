@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('ninetiesboy', ['ionic', 'ninetiesboy.controllers','firebase'])
+angular.module('ninetiesboy', ['ionic', 'ninetiesboy.controllers', 'ninetiesboy.services','firebase'])
 //.constant('FirebaseUrl', 'https://nineties-boy.firebaseio.com/')
 //.service('rootRef', ['FirebaseUrl', Firebase])
 .run(function($ionicPlatform, $ionicLoading, $firebaseAuth, $location, $rootScope, $state) {
