@@ -1,6 +1,6 @@
-angular.module('starter.controllers', [])
+angular.module('ninetiesboy.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+/*.controller('DashCtrl', function($scope) {})
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
@@ -15,12 +15,40 @@ angular.module('starter.controllers', [])
   $scope.remove = function(chat) {
     Chats.remove(chat);
   };
-})
+})*/
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
+.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope) {
+  console.log('Login Controller Initialized');
 
+  $scope.login = function() {
+     var auth = $firebaseAuth();
+
+    // login with Facebook
+    auth.$signInWithPopup("google").then(function(firebaseUser) {
+      console.log("Signed in as:", firebaseUser.uid);
+    }).catch(function(error) {
+      console.log("Authentication failed:", error);
+    });
+  };
+})
+.controller('NewsCtrl', function($scope, News){
+  $scope.$on('$ionicView.enter', function(e) {
+    $scope.news = News.all();
+  });
+  
+})
+.controller('NewsDetailCtrl', function($scope, NewsDetail){
+  
+})
+.controller('VideoCtrl', function($scope, Videos){
+  $scope.$on('$ionicView.enter', function(e) {
+    $scope.videos = Videos.all();
+  });
+  
+})
+.controller('VideoDetailCtrl', function($scope, VideoDetail){
+  
+})
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
