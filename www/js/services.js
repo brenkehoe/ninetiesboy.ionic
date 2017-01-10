@@ -1,5 +1,6 @@
 angular.module('ninetiesboy.services', ['firebase'])
-  .service('News', News);
+  .service('News', News)
+  .service('Videos', Videos);
 
 /*function Auth(rootRef, $firebaseAuth) {
   var ref = new Firebase('https://nineties-boy.firebaseio.com/');
@@ -18,6 +19,20 @@ function News($firebaseArray){
       },
       get: function(newsId){
         return news.$getRecord(newsId);
+      }
+    }
+}
+
+function Videos($firebaseArray){
+  var ref = firebase.database().ref().child("/videos");
+    var videos = $firebaseArray(ref);
+
+    return {
+      all: function(){
+        return videos;
+      },
+      get: function(videoId){
+        return videos.$getRecord(videoId);
       }
     }
 }

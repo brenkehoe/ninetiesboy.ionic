@@ -1,1 +1,8 @@
 /* Empty. Add your own CSS if you like */
+ul.bluerating li i {
+  color: blue;
+}
+
+ul.redrating li i {
+  color: red;
+}

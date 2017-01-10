@@ -37,12 +37,30 @@ angular.module('ninetiesboy.controllers', [])
   });
   
 })
-.controller('NewsDetailCtrl', function($scope, NewsDetail){
-  
+.controller('NewsDetailCtrl', function($scope, $stateParams, News){
+  $scope.$on('$ionicView.enter', function(e) {
+    $scope.newsItem = News.get($stateParams.newsId);
+  });
 })
-.controller('VideoCtrl', function($scope, Videos){
+.controller('VideoCtrl', function($scope, $sce, Videos){
+  $scope.trustSrc = function(src) {
+    return $sce.trustAsResourceUrl(src);
+  };
   $scope.$on('$ionicView.enter', function(e) {
     $scope.videos = Videos.all();
+
+    $scope.overallrating = {
+      rate: 3,
+      max: 10
+    };
+
+    $scope.readOnly = true;
+
+    $scope.yourrating = {
+      rate: 7,
+      max: 10
+    };
+
   });
   
 })

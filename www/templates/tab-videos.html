@@ -1,0 +1,19 @@
+<ion-view view-title="Videos">
+  <ion-content class="padding">
+    <ion-list ng-show="videos">
+        <div class="card" ng-repeat="video in videos">
+            <ion-item>
+                <div class="video-container">
+                    <iframe src="{{trustSrc(video.url)}}" frameborder="0" width="560" height="315"></iframe>
+                </div>
+                <ion-label>Overall Rating</ion-label>
+                <rating ng-model="overallrating.rate" max="overallrating.max" readonly="readOnly" class="redrating"></rating>
+                <ion-label>Your Rating</ion-label>
+                <rating ng-model="yourrating.rate" max="yourrating.max" class="bluerating"></rating>
+            </ion-item>
+            
+        </div>
+
+    </ion-list>
+</ion-content>
+</ion-view>

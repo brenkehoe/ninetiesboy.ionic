@@ -1,8 +1,8 @@
 <ion-view view-title="News">
     <ion-content>
         <ion-list ng-show="news">
-            <ion-item class="item-icon-left" ng-repeat="newsItem in news" type="item-text-wrap" ng-click="openNewsDetail(news.id)">
-                <h2>{{news.title}}</h2>
+            <ion-item class="item-icon-left" ng-repeat="newsItem in news" type="item-text-wrap" href="#/tab/news/{{newsItem.$id}}">
+                <h2>{{newsItem.title}}</h2>
             </ion-item>
         </ion-list>
         <ion-list ng-hide="news.length">

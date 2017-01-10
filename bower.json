@@ -4,5 +4,8 @@
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.3.2",
     "angularfire": "~2.2.0"
+  },
+  "dependencies": {
+    "ionic-rating": "^0.3.0"
   }
 }

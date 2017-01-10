@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('ninetiesboy', ['ionic', 'ninetiesboy.controllers', 'ninetiesboy.services','firebase'])
+angular.module('ninetiesboy', ['ionic', 'ninetiesboy.controllers', 'ninetiesboy.services','firebase', 'ionic.rating'])
 //.constant('FirebaseUrl', 'https://nineties-boy.firebaseio.com/')
 //.service('rootRef', ['FirebaseUrl', Firebase])
 .run(function($ionicPlatform, $ionicLoading, $firebaseAuth, $location, $rootScope, $state) {
@@ -71,7 +71,7 @@ angular.module('ninetiesboy', ['ionic', 'ninetiesboy.controllers', 'ninetiesboy.
   })
 
   .state('tab.news-detail', {
-    url: '/news:newsid',
+    url: '/news/:newsId',
     views: {
       'tab-news': {
         templateUrl: 'templates/tab-news-detail.html',
@@ -81,17 +81,17 @@ angular.module('ninetiesboy', ['ionic', 'ninetiesboy.controllers', 'ninetiesboy.
   })
 
   .state('tab.video', {
-    url: '/video',
+    url: '/videos',
     views: {
-      'tab-video': {
-        templateUrl: 'templates/tab-video.html',
+      'tab-videos': {
+        templateUrl: 'templates/tab-videos.html',
         controller: 'VideoCtrl'
       }
     }
   })
 
   .state('tab.video-detail', {
-    url: '/video:videoid',
+    url: '/videos/:videoId',
     views: {
       'tab-video': {
         templateUrl: 'templates/tab-news-detail.html',
