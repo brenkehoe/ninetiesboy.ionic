@@ -58,7 +58,7 @@ angular.module('ninetiesboy.controllers', [])
 
     $scope.readOnly = true;
 
-    $scope.yourrating = {
+    $scope.userrating = {
       rate: 7,
       max: 10
     };

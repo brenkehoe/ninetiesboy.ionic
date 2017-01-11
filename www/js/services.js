@@ -25,8 +25,8 @@ function News($firebaseArray){
     }
 }
 
-function Videos($firebaseArray){
-  var ref = firebase.database().ref().child("/videos");
+function Videos($firebaseArray, $rootScope){
+  var ref = firebase.database().ref('/videos');
     var videos = $firebaseArray(ref);
 
     return {
@@ -43,7 +43,7 @@ function Ratings($firebaseArray, $firebase, $rootScope){
     
     return {
       byUser: function(){
-        var ref = firebase.database().ref().child("ratings").orderByChild('uid').equalTo($rootScope.authData.uid);
+        var ref = firebase.database().ref('/ratings').orderByChild('uid').equalTo($rootScope.authData.uid);
         var ratings = $firebaseArray(ref);
 
         return ratings;
@@ -89,16 +89,17 @@ function Reseed($rootScope){
     newsref.push({ "title" : "news item four", "body": "asdasdasdasdasdasdasdasdadasd asda sasda sd"});
     newsref.push({ "title" : "news item five", "body": "asdasdasdasdasdasdasdasdadasd asda sasda sd"});
 
-    var ratingsRef = firebase.database().ref().child("/ratings");
+    
 
     var videosref = firebase.database().ref().child("/videos");
     videosref.push({"name" : "Nineties Boy Ft. Deeks - Magaluf (Official Video)",
       "url" : "https://www.youtube.com/embed/uuc1yV912Jo"})
     .then((snap) => {
-      ratingsRef.push({
+      addRating({
         "uid": $rootScope.authData.uid,
         "rating": 2,
-        "useridvideoid": $rootScope.authData.uid + "~" + snap.key
+        "useridvideoid": $rootScope.authData.uid + "~" + snap.key,
+        "videoid": snap.key
       });
     });
     videosref.push({
@@ -106,24 +107,35 @@ function Reseed($rootScope){
       "url" : "https://www.youtube.com/embed/msubZ1TA8-c"
     })
     .then((snap) => {
-      ratingsRef.push({
+      addRating({
         "uid": $rootScope.authData.uid,
         "rating": 6,
-        "useridvideoid": $rootScope.authData.uid + "~" + snap.key
+        "useridvideoid": $rootScope.authData.uid + "~" + snap.key,
+        "videoid": snap.key
       });
     });
     videosref.push({
       "name" : "Nineties Boy Ft. Deeks - Grime Up North (Official Video)",
       "url" : "https://www.youtube.com/embed/Y2rdwiT6mz4"
     }).then((snap) => {
-      ratingsRef.push({
+      addRating({
         "uid": $rootScope.authData.uid,
         "rating": 8,
-        "useridvideoid": $rootScope.authData.uid + "~" + snap.key
+        "useridvideoid": $rootScope.authData.uid + "~" + snap.key,
+        "videoid": snap.key
       });
     });
 
-    
+    function addRating(rating){
+      var ref = firebase.database().ref();
+      var id = ref.child('/ratings').push();
+      id.set(rating, function(err) {
+        if (!err) {
+          var name = id.key;
+          ref.child("/videos/" + rating.videoid + "/ratings/" + name).set(true);
+        }
+      });
+    }
 
   };
 
