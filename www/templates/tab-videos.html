@@ -9,7 +9,7 @@
                 <ion-label>Overall Rating</ion-label>
                 <rating ng-model="overallrating.rate" max="overallrating.max" readonly="readOnly" class="redrating"></rating>
                 <ion-label>Your Rating</ion-label>
-                <rating ng-model="userrating.value" max="10" class="bluerating"></rating>
+                <rating ng-bind="getUserVideo(video.$id)" max="10" class="bluerating"></rating>
             </ion-item>
             
         </div>

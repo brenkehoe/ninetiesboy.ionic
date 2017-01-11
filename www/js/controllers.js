@@ -54,6 +54,7 @@ angular.module('ninetiesboy.controllers', [])
       max: 10
     };
 
+    $scope.ratings = Ratings.byUser();
 
     $scope.readOnly = true;
 
@@ -61,6 +62,10 @@ angular.module('ninetiesboy.controllers', [])
       rate: 7,
       max: 10
     };
+
+    $scope.getUserRating= function(videoId){
+      return Ratings.byUserVideo(videoId);
+    }
 
   });
 

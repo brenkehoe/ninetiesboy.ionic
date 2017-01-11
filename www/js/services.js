@@ -43,7 +43,7 @@ function Ratings($firebaseArray, $firebase, $rootScope){
     
     return {
       byUser: function(){
-        var ref = firebase.database().ref().child("/ratings").equalTo($rootScope.authData.uid);
+        var ref = firebase.database().ref().child("ratings").orderByChild('uid').equalTo($rootScope.authData.uid);
         var ratings = $firebaseArray(ref);
 
         return ratings;
@@ -54,7 +54,7 @@ function Ratings($firebaseArray, $firebase, $rootScope){
         return ratings;
       },
       byUserVideo: function(videoId){
-        var ref = firebase.database().ref().child("/ratings").orderByChild('userIdvideoId').equalTo($rootScope.authData.uid + "~" + videoId);
+        var ref = firebase.database().ref().child("ratings").orderByChild('useridvideoid').equalTo($rootScope.authData.uid + "~" + videoId);
         var ratings = $firebaseArray(ref);
         return ratings;
       },
@@ -95,9 +95,10 @@ function Reseed($rootScope){
     videosref.push({"name" : "Nineties Boy Ft. Deeks - Magaluf (Official Video)",
       "url" : "https://www.youtube.com/embed/uuc1yV912Jo"})
     .then((snap) => {
-      ratingsRef.child(snap.key).set({
+      ratingsRef.push({
         "uid": $rootScope.authData.uid,
-        "rating": 2
+        "rating": 2,
+        "useridvideoid": $rootScope.authData.uid + "~" + snap.key
       });
     });
     videosref.push({
@@ -105,18 +106,20 @@ function Reseed($rootScope){
       "url" : "https://www.youtube.com/embed/msubZ1TA8-c"
     })
     .then((snap) => {
-      ratingsRef.child(snap.key).set({
+      ratingsRef.push({
         "uid": $rootScope.authData.uid,
-        "rating": 6
+        "rating": 6,
+        "useridvideoid": $rootScope.authData.uid + "~" + snap.key
       });
     });
     videosref.push({
       "name" : "Nineties Boy Ft. Deeks - Grime Up North (Official Video)",
       "url" : "https://www.youtube.com/embed/Y2rdwiT6mz4"
     }).then((snap) => {
-      ratingsRef.child(snap.key).set({
+      ratingsRef.push({
         "uid": $rootScope.authData.uid,
-        "rating": 8
+        "rating": 8,
+        "useridvideoid": $rootScope.authData.uid + "~" + snap.key
       });
     });
 
