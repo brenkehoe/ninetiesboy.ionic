@@ -42,12 +42,12 @@ function Videos($firebaseArray, $rootScope){
 function Ratings($firebaseArray, $firebase, $rootScope){
     
     return {
-      byUser: function(){
+     /* byUser: function(){
         var ref = firebase.database().ref('/ratings').orderByChild('uid').equalTo($rootScope.authData.uid);
         var ratings = $firebaseArray(ref);
 
         return ratings;
-      },
+      },*/
       byVideo: function(videoId){
         var ref = firebase.database().ref().child("/ratings").orderByChild('videoId').equalTo(videoId);
         var ratings = $firebaseArray(ref);
@@ -95,11 +95,9 @@ function Reseed($rootScope){
     videosref.push({"name" : "Nineties Boy Ft. Deeks - Magaluf (Official Video)",
       "url" : "https://www.youtube.com/embed/uuc1yV912Jo"})
     .then((snap) => {
-      addRating({
-        "uid": $rootScope.authData.uid,
+      videosref.child(snap.key).child('ratings').child($rootScope.authData.uid)
+      .set({
         "rating": 2,
-        "useridvideoid": $rootScope.authData.uid + "~" + snap.key,
-        "videoid": snap.key
       });
     });
     videosref.push({
@@ -107,22 +105,18 @@ function Reseed($rootScope){
       "url" : "https://www.youtube.com/embed/msubZ1TA8-c"
     })
     .then((snap) => {
-      addRating({
-        "uid": $rootScope.authData.uid,
-        "rating": 6,
-        "useridvideoid": $rootScope.authData.uid + "~" + snap.key,
-        "videoid": snap.key
+      videosref.child(snap.key).child('ratings').child($rootScope.authData.uid)
+      .set({
+        "rating": 5,
       });
     });
     videosref.push({
       "name" : "Nineties Boy Ft. Deeks - Grime Up North (Official Video)",
       "url" : "https://www.youtube.com/embed/Y2rdwiT6mz4"
     }).then((snap) => {
-      addRating({
-        "uid": $rootScope.authData.uid,
-        "rating": 8,
-        "useridvideoid": $rootScope.authData.uid + "~" + snap.key,
-        "videoid": snap.key
+      videosref.child(snap.key).child('ratings').child($rootScope.authData.uid)
+      .set({
+        "rating": 9,
       });
     });
 

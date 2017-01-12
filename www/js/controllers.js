@@ -54,7 +54,7 @@ angular.module('ninetiesboy.controllers', [])
       max: 10
     };
 
-    $scope.ratings = Ratings.byUser();
+    //$scope.ratings = Ratings.byUser();
 
     $scope.readOnly = true;
 
