@@ -42,7 +42,7 @@ angular.module('ninetiesboy.controllers', [])
     $scope.newsItem = News.get($stateParams.newsId);
   });
 })
-.controller('VideoCtrl', function($scope, $sce, Videos, Ratings){
+.controller('VideoCtrl', function($scope, $sce, Videos, $rootScope){
   $scope.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src);
   };
@@ -54,24 +54,13 @@ angular.module('ninetiesboy.controllers', [])
       max: 10
     };
 
-    //$scope.ratings = Ratings.byUser();
-
     $scope.readOnly = true;
-
-    $scope.userrating = {
-      rate: 7,
-      max: 10
-    };
-
-    $scope.getUserRating= function(videoId){
-      return Ratings.byUserVideo(videoId);
-    }
-
   });
 
-  $scope.getCurrentRating = function(videoId)
+  $scope.addRating = function(videoId, rating)
   {
-    
+    console.log("adding rating for video id:" + videoId + " with rating: " + rating);
+    Videos.addRating(videoId, rating);
   }
   
 })

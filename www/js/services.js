@@ -1,8 +1,7 @@
 angular.module('ninetiesboy.services', ['firebase'])
   .service('News', News)
   .service('Videos', Videos)
-  .service('Reseed', Reseed)
-  .service('Ratings', Ratings);
+  .service('Reseed', Reseed);
 
 /*function Auth(rootRef, $firebaseAuth) {
   var ref = new Firebase('https://nineties-boy.firebaseio.com/');
@@ -35,44 +34,12 @@ function Videos($firebaseArray, $rootScope){
       },
       get: function(videoId){
         return videos.$getRecord(videoId);
-      }
-    }
-}
-
-function Ratings($firebaseArray, $firebase, $rootScope){
-    
-    return {
-     /* byUser: function(){
-        var ref = firebase.database().ref('/ratings').orderByChild('uid').equalTo($rootScope.authData.uid);
-        var ratings = $firebaseArray(ref);
-
-        return ratings;
-      },*/
-      byVideo: function(videoId){
-        var ref = firebase.database().ref().child("/ratings").orderByChild('videoId').equalTo(videoId);
-        var ratings = $firebaseArray(ref);
-        return ratings;
       },
-      byUserVideo: function(videoId){
-        var ref = firebase.database().ref().child("ratings").orderByChild('useridvideoid').equalTo($rootScope.authData.uid + "~" + videoId);
-        var ratings = $firebaseArray(ref);
-        return ratings;
-      },
-      totalByVideo: function(videoId){
-        var ref = firebase.database().ref().child("/ratings").orderByChild('videoId').equalTo(videoId);
- 
-        var AverageFactory = $FirebaseArray.$extendFactory({
-          getAverage: function() {
-            var total = 0;
-            // the array data is located in this.$list
-            angular.forEach(this.$list, function(rec) {
-              total += rec.amount;
-            });
-            return total / this.$list.length;
-          }
-        });
-
-        return $firebase(ref, {arrayFactory: AverageFactory}).$asArray();
+      addRating: function(videoId, rating){
+        ref.child(videoId)
+        .child('ratings')
+        .child($rootScope.authData.uid)
+        .set({ "rating": rating});
       }
     }
 }
@@ -92,6 +59,7 @@ function Reseed($rootScope){
     
 
     var videosref = firebase.database().ref().child("/videos");
+    
     videosref.push({"name" : "Nineties Boy Ft. Deeks - Magaluf (Official Video)",
       "url" : "https://www.youtube.com/embed/uuc1yV912Jo"})
     .then((snap) => {
@@ -100,6 +68,7 @@ function Reseed($rootScope){
         "rating": 2,
       });
     });
+    
     videosref.push({
       "name" : "Nineties Boy - Push (Official Video)",
       "url" : "https://www.youtube.com/embed/msubZ1TA8-c"
@@ -110,6 +79,7 @@ function Reseed($rootScope){
         "rating": 5,
       });
     });
+    
     videosref.push({
       "name" : "Nineties Boy Ft. Deeks - Grime Up North (Official Video)",
       "url" : "https://www.youtube.com/embed/Y2rdwiT6mz4"
@@ -120,16 +90,55 @@ function Reseed($rootScope){
       });
     });
 
-    function addRating(rating){
-      var ref = firebase.database().ref();
-      var id = ref.child('/ratings').push();
-      id.set(rating, function(err) {
-        if (!err) {
-          var name = id.key;
-          ref.child("/videos/" + rating.videoid + "/ratings/" + name).set(true);
-        }
-      });
-    }
+    videosref.push({
+      "name" : "Nineties Boy Ft. Deeks - I'm Yorkshire (Official Video)",
+      "url" : "https://www.youtube.com/embed/gYGBlBRH1gY"
+    });
+
+    videosref.push({
+      "name" : "Deeks Ft. Nineties Boy - Droppin Bangers (Official Video)",
+      "url" : "https://www.youtube.com/embed/TOe-uFSUkHI"
+    });
+
+    videosref.push({
+      "name" : "Nineties Boy Ft. Deeks - The Sound (Official Live Session)",
+      "url" : "https://www.youtube.com/embed/aNqlKvbrBAk"
+    });
+
+    videosref.push({
+      "name" : "Nineties Boy Ft. Deeks & Maukoe - Take Me Back (Official Video)",
+      "url" : "https://www.youtube.com/embed/JN92RoF3-9k"
+    });
+
+    videosref.push({
+      "name" : "Nineties Boy - Get Em (Official Video)",
+      "url" : "https://www.youtube.com/embed/Hbem5R9ZR-8"
+    });
+
+    videosref.push({
+      "name" : "Nineties Boy - Two Day Hangover (Official Video)",
+      "url" : "https://www.youtube.com/embed/kP3M4gsanzk"
+    });
+
+    videosref.push({
+      "name" : "Nineties Boy - Good Enough For You (Official Video)",
+      "url" : "https://www.youtube.com/embed/N2_-P0rWFYs"
+    });
+
+    videosref.push({
+      "name" : "Nineties Boy - Brit Hop: Definition (Official Video)",
+      "url" : "https://www.youtube.com/embed/pMQELFV5LHg"
+    });
+
+    videosref.push({
+      "name" : "Nineties Boy - Get It On ft. Tayala (Official Video)",
+      "url" : "https://www.youtube.com/embed/Wvln-XIq1s0"
+    });
+
+    videosref.push({
+      "name" : "Nineties Boy - Take Control (Official Video)",
+      "url" : "https://www.youtube.com/embed/05GwbK9JCFM"
+    });
 
   };
 

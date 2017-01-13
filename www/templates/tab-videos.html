@@ -8,8 +8,16 @@
                 </div>
                 <ion-label>Overall Rating</ion-label>
                 <rating ng-model="overallrating.rate" max="overallrating.max" readonly="readOnly" class="redrating"></rating>
-                <ion-label>Your Rating</ion-label>
-                <rating ng-model="userrating.rate" max="10" class="bluerating"></rating>
+                <div ng-show="video.ratings">
+                    <div ng-repeat="rating in video.ratings">
+                        <ion-label>Your Rating</ion-label>
+                        <rating ng-model="rating.rating" ng-change="videos.$save(video)" max="10" class="bluerating"></rating>
+                    </div>
+                </div>
+                <div ng-show="!video.ratings">
+                    <ion-label>Your Rating</ion-label>
+                    <rating ng-model="rating.rating" ng-change="addRating(video.$id, rating.rating)" max="10" class="bluerating"></rating>
+                </div>
             </ion-item>
             
         </div>
