@@ -1,4 +1,17 @@
 angular.module('ninetiesboy.services', ['firebase'])
+.factory('RatingsWithAverage', function ($firebaseArray){
+    return $firebaseArray.$extend({
+      average: function() {
+        var total = 0;
+        var count = 0;
+        angular.forEach(this.$list, function(rat) {
+          total += rat.rating;
+          count++;
+        });
+        return total > 0 ? total / count : 0;
+      }
+    });
+  })
   .service('News', News)
   .service('Videos', Videos)
   .service('Reseed', Reseed);
@@ -9,6 +22,8 @@ angular.module('ninetiesboy.services', ['firebase'])
 }
 
 Auth.$inject = ['rootRef', '$firebaseAuth'];*/
+
+
 
 function News($firebaseArray){
     var ref = firebase.database().ref().child("/news");
@@ -24,7 +39,7 @@ function News($firebaseArray){
     }
 }
 
-function Videos($firebaseArray, $rootScope){
+function Videos($firebaseArray, $rootScope, RatingsWithAverage){
   var ref = firebase.database().ref('/videos');
     var videos = $firebaseArray(ref);
 
@@ -40,6 +55,10 @@ function Videos($firebaseArray, $rootScope){
         .child('ratings')
         .child($rootScope.authData.uid)
         .set({ "rating": rating});
+      },
+      getAverageRating: function(videoId){
+        var ratingsRef = ref.child(videoId).child('ratings');
+        return new RatingsWithAverage(ratingsRef);
       }
     }
 }

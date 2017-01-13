@@ -4,10 +4,10 @@
         <div class="card" ng-repeat="video in videos">
             <ion-item>
                 <div class="video-container">
-                    <iframe src="{{trustSrc(video.url)}}" frameborder="0" width="560" height="315"></iframe>
+                    <iframe src="{{trustSrc(video.url)}}" frameborder="0" width="100%" height="320"></iframe>
                 </div>
                 <ion-label>Overall Rating</ion-label>
-                <rating ng-model="overallrating.rate" max="overallrating.max" readonly="readOnly" class="redrating"></rating>
+                <rating ng-model="averageRatings[video.$id].average()" max="10" readonly="readOnly" class="redrating"></rating>
                 <div ng-show="video.ratings">
                     <div ng-repeat="rating in video.ratings">
                         <ion-label>Your Rating</ion-label>
