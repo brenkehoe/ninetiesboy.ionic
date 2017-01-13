@@ -30,7 +30,7 @@ angular.module('ninetiesboy', ['ionic', 'ninetiesboy.controllers', 'ninetiesboy.
 	  } else {
 	    console.log("Logged in as", authData.uid);
 	    $rootScope.authData = authData;
-	    $state.go('tab.video');
+	    $state.go('tab.news');
 	  }
 	  // This will display the user's name in our view
 	});

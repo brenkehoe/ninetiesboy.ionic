@@ -69,12 +69,47 @@ function Reseed($rootScope){
 
   seeder.Seed = function(){
     var newsref = firebase.database().ref().child("/news");
-    newsref.push({ "title" : "news item one", "body": "asdasdasdasdasdasdasdasdadasd asda sasda sd"});
-    newsref.push({ "title" : "news item two", "body": "asdasdasdasdasdasdasdasdadasd asda sasda sd"});
-    newsref.push({ "title" : "news item three", "body": "asdasdasdasdasdasdasdasdadasd asda sasda sd"});
-    newsref.push({ "title" : "news item four", "body": "asdasdasdasdasdasdasdasdadasd asda sasda sd"});
-    newsref.push({ "title" : "news item five", "body": "asdasdasdasdasdasdasdasdadasd asda sasda sd"});
+    newsref.push({ 
+      "title" : "FAM - THE ALBUM", 
+      "body": "FAM - THE ALBUM: OUT NOW ON ITUNES",
+      "imageName": "fam-album.webp"
+    });
 
+    newsref.push({ 
+      "title" : "TAKE ME BACK", 
+      "body": "NINETIES BOY FT. DEEKS & MAUKOE - TAKE ME BACK: OUT NOW ON ITUNES",
+      "imageName": "takemeback-single.webp"
+    });
+
+    newsref.push({ 
+      "title" : "GET EM", 
+      "body": "NINETIES BOY - GET EM: OUT NOW ON ITUNES",
+      "imageName": "getem-signle.webp"
+    });
+
+    newsref.push({ 
+      "title" : "TWO DAY HANGOVER", 
+      "body": "NINETIES BOY - TWO DAY HANGOVER: OUT ON NOW ON ITUNES",
+      "imageName": "twodayhangover-single.webp"
+    });
+
+    newsref.push({ 
+      "title" : "GOOD ENOUGH", 
+      "body": "NINETIES BOY - GOOD ENOUGH: OUT NOW ON ITUNES",
+      "imageName": "goodenoughforyou-single.webp"
+    });
+
+    newsref.push({ 
+      "title" : "GET IT ON", 
+      "body": "NINETIES BOY FT. TAYALA - GET IT ON: OUT NOW ON ITUNES",
+      "imageName": "getiton-single.webp"
+    });
+
+    newsref.push({ 
+      "title" : "BRIT HOP", 
+      "body": "NINETIES BOY - BRIT HOP: OUT NOW ON ITUNES",
+      "imageName": "brithop-single.webp"
+    });
     
 
     var videosref = firebase.database().ref().child("/videos");

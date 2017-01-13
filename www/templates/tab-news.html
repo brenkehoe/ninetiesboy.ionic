@@ -2,7 +2,8 @@
     <ion-content>
         <ion-list ng-show="news">
             <ion-item class="item-icon-left" ng-repeat="newsItem in news" type="item-text-wrap" href="#/tab/news/{{newsItem.$id}}">
-                <h2>{{newsItem.title}}</h2>
+                <img style="display: inline" ng-src="img/{{newsItem.imageName}}" height="50" width="150" />
+                <h2 style="display: inline; vertical-align: middle;">{{newsItem.title}}</h2>
             </ion-item>
         </ion-list>
         <ion-list ng-hide="news.length">
